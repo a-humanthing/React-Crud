@@ -16,6 +16,10 @@ import AddEdit from "./Pages/AddEdit"
 import About from "./Pages/About"
 import View from "./Pages/View"
 import NavBar from "./Components/Nav/NavBar"
+import Register from "./Pages/Register"
+import UserRegister from "./Pages/user/UserRegister"
+import Login from "./Pages/user/Login"
+import UserHome from "./Pages/user/UserHome"
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +32,10 @@ function App() {
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
           <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/user/register" element={<UserRegister />} />
+          <Route path="/user/login" element={<Login />} />
+          <Route path="/user/home" element={<UserHome />} />
         </Routes>
       </div>
     </BrowserRouter>

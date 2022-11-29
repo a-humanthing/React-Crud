@@ -4,18 +4,36 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { useNavigate, Link, useLocation, redirect } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap"
+import { toast } from "react-toastify"
 
 function NavBar() {
   const [activeTab, setActiveTab] = useState("Home")
+  const [username, setUsername] = useState()
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
     if (location.pathname === "/") setActiveTab("Home")
     if (location.pathname === "/add") setActiveTab("AddUser")
     if (location.pathname === "/about") setActiveTab("About")
+    if (location.pathname === "/register") setActiveTab("Register")
   }, [location])
+  useEffect(() => {
+    const userDetails = localStorage.getItem("user")
+    const user = JSON.parse(userDetails)
+    if (user) {
+      setUsername(user.name)
+      console.log(user.name)
+    }
+  }, [])
+
+  const handleLogout = () => {
+    setUsername("")
+    localStorage.clear()
+    toast.success("Logout Succesfully")
+  }
+
   return (
-    <Navbar bg="success" expand="lg">
+    <Navbar bg="secondary" expand="lg">
       <Container>
         <Navbar.Brand>User Management System</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,18 +55,24 @@ function NavBar() {
                 AddUser
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/about">
+            {username && (
+              <LinkContainer to="/about">
+                <Nav.Link
+                  className={`${activeTab == "About" ? "active" : ""}`}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Nav.Link>
+              </LinkContainer>
+            )}
+            <LinkContainer to="/register">
               <Nav.Link
-                className={`${activeTab == "About" ? "active" : ""}`}
-                onClick={() => setActiveTab("About")}
+                className={`${activeTab == "Register" ? "active" : ""}`}
+                onClick={() => setActiveTab("Register")}
               >
-                About
+                {username ? username : "Not Logged"}
               </Nav.Link>
             </LinkContainer>
-            <Nav.Link href="#link">
-              Log
-              {/* {userDetails ? userDetails : "Not Logged"} */}
-            </Nav.Link>
             <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
             <Nav.Link href="#home">Profile</Nav.Link>
           </Nav>
