@@ -6,7 +6,7 @@ import { useNavigate, Link, useLocation, redirect } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap"
 import { toast } from "react-toastify"
 
-function NavBar() {
+function NavBar(props) {
   const [activeTab, setActiveTab] = useState("Home")
   const [username, setUsername] = useState()
   const navigate = useNavigate()
@@ -17,14 +17,6 @@ function NavBar() {
     if (location.pathname === "/about") setActiveTab("About")
     if (location.pathname === "/register") setActiveTab("Register")
   }, [location])
-  useEffect(() => {
-    const userDetails = localStorage.getItem("user")
-    const user = JSON.parse(userDetails)
-    if (user) {
-      setUsername(user.name)
-      console.log(user.name)
-    }
-  }, [])
 
   const handleLogout = () => {
     setUsername("")
@@ -33,7 +25,7 @@ function NavBar() {
   }
 
   return (
-    <Navbar bg="secondary" expand="lg">
+    <Navbar bg={props.user === "user" ? "secondary" : "primary"} expand="lg">
       <Container>
         <Navbar.Brand>User Management System</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -74,7 +66,6 @@ function NavBar() {
               </Nav.Link>
             </LinkContainer>
             <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
-            <Nav.Link href="#home">Profile</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

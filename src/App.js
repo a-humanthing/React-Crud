@@ -20,22 +20,18 @@ import Register from "./Pages/Register"
 import UserRegister from "./Pages/user/UserRegister"
 import Login from "./Pages/user/Login"
 import UserHome from "./Pages/user/UserHome"
+import AdminRoutes from "./routes/AdminRoutes"
+import UserRoutes from "./routes/UserRoutes"
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
-        <ToastContainer position="top-center" />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add" element={<AddEdit />} />
-          <Route path="/update/:id" element={<AddEdit />} />
-          <Route path="/view/:id" element={<View />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/user/register" element={<UserRegister />} />
+          <Route path="/*" element={<AdminRoutes />} />
+          <Route path="/user/*" element={<UserRoutes />} />
+          {/* <Route path="/user/register" element={<UserRegister />} />
           <Route path="/user/login" element={<Login />} />
-          <Route path="/user/home" element={<UserHome />} />
+          <Route path="/user/home" element={<UserHome />} /> */}
         </Routes>
       </div>
     </BrowserRouter>
