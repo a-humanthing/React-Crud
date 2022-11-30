@@ -13,6 +13,7 @@ import {
 import { toast } from "react-toastify"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { Button } from "react-bootstrap"
 
 function UserRegister() {
   const [name, setName] = useState("")
@@ -141,9 +142,9 @@ function UserRegister() {
                   />
                 </div>
 
-                <MDBBtn className="mb-4" size="lg">
+                <Button type="submit" className="mb-4">
                   Register
-                </MDBBtn>
+                </Button>
               </form>
             </MDBCol>
 

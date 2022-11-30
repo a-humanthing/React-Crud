@@ -2,8 +2,8 @@ import React from "react"
 
 const UserHome = () => {
   return (
-    <div>
-      <h1>Userhome</h1>
+    <div style={{ marginTop: "80px" }}>
+      <h1>User Home</h1>
     </div>
   )
 }

@@ -44,7 +44,7 @@ const Login = () => {
   }
   return (
     <div>
-      <h1>SignUp</h1>
+      <h1>Log In</h1>
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -54,6 +54,7 @@ const Login = () => {
           placeholder="Name"
         />{" "}
         <br />
+        <br />
         <input
           type="text"
           value={password}
@@ -61,6 +62,7 @@ const Login = () => {
           name="password"
           placeholder="Password"
         />{" "}
+        <br />
         <br />
         <Button type="submit" variant="primary">
           Log In

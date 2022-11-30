@@ -14,6 +14,7 @@ import {
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { Button } from "react-bootstrap"
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -21,7 +22,9 @@ export default function Profile() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
-  const [userData, setUserData] = useState("")
+  const [image, setImage] = useState("")
+  const [profilepic, setProfilepic] = useState("")
+
   const userDetails = localStorage.getItem("user")
   useEffect(() => {
     // setUserData(localStorage.getItem("user"))
@@ -55,6 +58,7 @@ export default function Profile() {
         setEmail(data.email)
         setName(data.name)
         setPhone(data.phone)
+        setProfilepic(data.profilepic)
         console.log("authorized")
         toast.success("Authorized")
       } else {
@@ -67,6 +71,37 @@ export default function Profile() {
     }
     if (userDetails) fetchData()
   }, [])
+
+  const handleSubmit = async () => {
+    const formData = new FormData()
+    formData.append("file", image)
+    formData.append("upload_preset", "ews1hedm")
+    formData.append("cloud_name", "dsehj85r6")
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dsehj85r6/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
+      const data = await response.json()
+      const url = data.url
+      if (data) {
+        const userDetails = await localStorage.getItem("user")
+        const user = JSON.parse(userDetails)
+        const id = user.id
+        console.log(user)
+        const response = await axios.post("http://localhost:5000/uploadpic", {
+          url,
+          id,
+        })
+        console.log("res from upload back = ", response)
+        setProfilepic(response.data.user.profilepic)
+      }
+      console.log(data)
+    } catch (error) {}
+  }
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
@@ -84,10 +119,21 @@ export default function Profile() {
                   }}
                 >
                   <MDBCardImage
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    src={
+                      profilepic
+                        ? profilepic
+                        : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    }
                     alt="Avatar"
-                    className="my-5"
-                    style={{ width: "80px" }}
+                    className="my-5 "
+                    style={{
+                      maxWidth: "150px",
+                      minWidth: "150px",
+                      maxHeight: "150px",
+                      minHeight: "150px",
+                      objectFit: "cover",
+                      overflow: "hidden",
+                    }}
                     fluid
                   />
                   <MDBTypography tag="h5">{name}</MDBTypography>
@@ -113,20 +159,26 @@ export default function Profile() {
                       </MDBCol>
                     </MDBRow>
 
-                    <MDBTypography tag="h6">Information</MDBTypography>
+                    <MDBTypography tag="h6">Action</MDBTypography>
                     <hr className="mt-0 mb-4" />
+
                     <MDBRow className="pt-1">
                       <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Email</MDBTypography>
+                        <MDBTypography tag="h6">
+                          Update Profile Pic
+                        </MDBTypography>
                         <MDBCardText className="text-muted">
-                          info@example.com
+                          <input
+                            type="file"
+                            name="image"
+                            onChange={(e) => setImage(e.target.files[0])}
+                          />
                         </MDBCardText>
                       </MDBCol>
-                      <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Phone</MDBTypography>
-                        <MDBCardText className="text-muted">
-                          123 456 789
-                        </MDBCardText>
+                      <MDBCol size="6" className="mb-3 my-auto">
+                        <Button onClick={handleSubmit} variant="primary">
+                          Upload
+                        </Button>
                       </MDBCol>
                     </MDBRow>
 

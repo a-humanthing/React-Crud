@@ -16,6 +16,15 @@ function NavBar(props) {
     if (location.pathname === "/add") setActiveTab("AddUser")
     if (location.pathname === "/about") setActiveTab("About")
     if (location.pathname === "/register") setActiveTab("Register")
+
+    const adminDetails = localStorage.getItem("admin")
+    if (adminDetails) {
+      const admin = JSON.parse(adminDetails)
+      if (admin) {
+        setUsername("admin")
+        console.log(admin.token)
+      }
+    }
   }, [location])
 
   const handleLogout = () => {
@@ -49,25 +58,16 @@ function NavBar(props) {
                 AddUser
               </Nav.Link>
             </LinkContainer>
-
-            <LinkContainer to="/about">
+            {username ? (
               <Nav.Link
                 className={`${activeTab == "About" ? "active" : ""}`}
                 onClick={handleLogout}
               >
                 Logout
               </Nav.Link>
-            </LinkContainer>
-
-            <LinkContainer to="/register">
-              <Nav.Link
-                className={`${activeTab == "Register" ? "active" : ""}`}
-                onClick={() => setActiveTab("Register")}
-              >
-                {username ? username : "Not Logged"}
-              </Nav.Link>
-            </LinkContainer>
-            <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
+            ) : (
+              <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
