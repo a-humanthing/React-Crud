@@ -13,8 +13,9 @@ import {
 import { toast } from "react-toastify"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { Button } from "react-bootstrap"
 
-function UserRegister() {
+function Login() {
   const [email, setEmail] = useState("")
 
   const [password, setPassword] = useState("")
@@ -52,7 +53,7 @@ function UserRegister() {
           toast.error("Invalid Login")
         }
       } catch (error) {
-        toast.error("Invalid Login")
+        toast.error("Invalid password or email")
       }
     } else {
       toast.error("Invalid password or email")
@@ -95,9 +96,12 @@ function UserRegister() {
                   />
                 </div>
 
-                <MDBBtn className="mb-4" size="lg">
+                {/* <MDBBtn className="mb-4" size="lg">
                   Login
-                </MDBBtn>
+                </MDBBtn> */}
+                <Button type="submit" variant="primary">
+                  Login
+                </Button>
               </form>
             </MDBCol>
 
@@ -126,4 +130,4 @@ function UserRegister() {
   )
 }
 
-export default UserRegister
+export default Login

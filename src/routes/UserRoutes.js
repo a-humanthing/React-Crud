@@ -12,7 +12,7 @@ const UserRoutes = () => {
   return (
     <div>
       <UserNav />
-      <ToastContainer position="top-center" />
+      <ToastContainer style={{ marginTop: "60px" }} position="top-center" />
       <Routes>
         <Route path="/register" element={<UserRegister />} />
         <Route path="/login" element={<Login />} />

@@ -13,13 +13,13 @@ function UserNav() {
     const user = JSON.parse(userDetails)
     if (user) {
       setUsername(user.name)
-      console.log(user.name)
+      console.log(user.token)
     }
   }, [])
   const navigate = useNavigate()
   const handleLogout = () => {
     setUsername("")
-    localStorage.clear()
+    localStorage.removeItem("user")
     toast.success("Logout Succesfully")
     setTimeout(() => {
       navigate("/user/login")
@@ -27,7 +27,7 @@ function UserNav() {
   }
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar style={{ marginBottom: "50px" }} bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>User</Navbar.Brand>
           <Nav className="me-auto">

@@ -20,10 +20,12 @@ function NavBar(props) {
 
   const handleLogout = () => {
     setUsername("")
-    localStorage.clear()
-    toast.success("Logout Succesfully")
+    localStorage.removeItem("admin")
+    toast.success("Admin Logout Succesfull")
+    setTimeout(() => {
+      navigate("/login")
+    }, 500)
   }
-
   return (
     <Navbar bg={props.user === "user" ? "secondary" : "primary"} expand="lg">
       <Container>
@@ -47,16 +49,16 @@ function NavBar(props) {
                 AddUser
               </Nav.Link>
             </LinkContainer>
-            {username && (
-              <LinkContainer to="/about">
-                <Nav.Link
-                  className={`${activeTab == "About" ? "active" : ""}`}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Nav.Link>
-              </LinkContainer>
-            )}
+
+            <LinkContainer to="/about">
+              <Nav.Link
+                className={`${activeTab == "About" ? "active" : ""}`}
+                onClick={handleLogout}
+              >
+                Logout
+              </Nav.Link>
+            </LinkContainer>
+
             <LinkContainer to="/register">
               <Nav.Link
                 className={`${activeTab == "Register" ? "active" : ""}`}

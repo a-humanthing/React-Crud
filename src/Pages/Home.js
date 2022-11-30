@@ -8,14 +8,23 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 const Home = () => {
   const [data, setData] = useState([])
+  const adminDetails = localStorage.getItem("admin")
   useEffect(() => {
-    getUsers()
+    if (adminDetails) getUsers()
   }, [])
 
   const getUsers = async () => {
-    const response = await axios.get("http://localhost:5000/users")
+    const admin = JSON.parse(adminDetails)
+    const token = admin.token
+    const response = await axios.get("http://localhost:5000/users", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     if (response.status == 200) {
-      setData(response.data)
+      console.log("data=>", response.data)
+      setData(response.data.users)
+      toast.success("Authorized as admin")
+    } else {
+      toast.error("You have to login as Admin")
     }
   }
   const onDeleteUser = async (id) => {
@@ -27,7 +36,6 @@ const Home = () => {
       }
     }
   }
-  console.log("data=>", data)
   return (
     <div>
       <div style={{ marginTop: "150px" }}>

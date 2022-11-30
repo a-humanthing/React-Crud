@@ -14,7 +14,7 @@ const initialState = {
 }
 const AddEdit = () => {
   const [state, setState] = useState(initialState)
-  const { name, email, phone } = state
+  const { name, email, phone, password } = state
 
   const addUser = async (data) => {
     const response = await axios.post("http://localhost:5000/user", data)
@@ -70,7 +70,7 @@ const AddEdit = () => {
         onSubmit={handleSubmit}
         style={{ margin: "auto", padding: "15px", alignContent: "center" }}
       >
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Name</label> <br />
         <input
           type="text"
           id="name"
@@ -79,7 +79,9 @@ const AddEdit = () => {
           onChange={handleInputChange}
           value={name}
         />
+        <br />
         <label htmlFor="name">Email</label>
+        <br />
         <input
           type="text"
           id="email"
@@ -88,7 +90,9 @@ const AddEdit = () => {
           onChange={handleInputChange}
           value={email}
         />
+        <br />
         <label htmlFor="phone">Phone</label>
+        <br />
         <input
           type="text"
           id="phone"
@@ -97,6 +101,18 @@ const AddEdit = () => {
           onChange={handleInputChange}
           value={phone}
         />
+        <br />
+        <label htmlFor="password">Password</label>
+        <br />
+        <input
+          type="text"
+          id="password"
+          name="password"
+          placeholder="Enter Password"
+          onChange={handleInputChange}
+          value={password}
+        />
+        <br /> <br />
         <input type="submit" value={id ? "Update" : "Add"} />
       </form>
     </div>
