@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react"
-import NavBar from "../Components/Nav/NavBar"
-import "./Home.css"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
+import NavBar from "../../Nav/NavBar"
+import "./UserTable.css"
 import Table from "react-bootstrap/Table"
 import Button from "react-bootstrap/Button"
 import axios from "axios"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
-const Home = () => {
+const UserTable = () => {
   const [data, setData] = useState([])
   const adminDetails = localStorage.getItem("admin")
+
   useEffect(() => {
     if (adminDetails) getUsers()
   }, [])
@@ -87,4 +88,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default UserTable

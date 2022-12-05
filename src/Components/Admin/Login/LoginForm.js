@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-const Login = () => {
+const LoginForm = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -72,4 +72,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginForm

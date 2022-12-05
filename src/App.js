@@ -18,9 +18,6 @@ function App() {
         <Routes>
           <Route path="/*" element={<AdminRoutes />} />
           <Route path="/user/*" element={<UserRoutes />} />
-          {/* <Route path="/user/register" element={<UserRegister />} />
-          <Route path="/user/login" element={<Login />} />
-          <Route path="/user/home" element={<UserHome />} /> */}
         </Routes>
       </div>
     </BrowserRouter>

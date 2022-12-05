@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import NavBar from "../Components/Nav/NavBar"
+import NavBar from "../../Nav/NavBar"
 import axios from "axios"
 import "./AddEdit.css"
 import "react-toastify/dist/ReactToastify.css"
@@ -12,7 +12,7 @@ const initialState = {
   email: "",
   phone: "",
 }
-const AddEdit = () => {
+const AddEditForm = () => {
   const [state, setState] = useState(initialState)
   const { name, email, phone, password } = state
 
@@ -119,4 +119,4 @@ const AddEdit = () => {
   )
 }
 
-export default AddEdit
+export default AddEditForm

@@ -1,11 +1,11 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
-import Home from "../Pages/Home"
-import AddEdit from "../Pages/AddEdit"
-import View from "../Pages/View"
+import Home from "../Pages/Admin/Home"
+import AddEdit from "../Pages/Admin/AddEdit"
+import View from "../Pages/Admin/View"
 import { ToastContainer } from "react-toastify"
 import NavBar from "../Components/Nav/NavBar"
-import Login from "../Pages/Login"
+import Login from "../Pages/Admin/Login"
 
 const AdminRoutes = () => {
   return (

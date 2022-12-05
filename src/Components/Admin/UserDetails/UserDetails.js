@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import "./View.css"
+import "./UserDetails.css"
 import { useNavigate, useParams } from "react-router-dom"
-const View = () => {
+const UserDetails = () => {
   const [user, setUser] = useState("")
   const { id } = useParams()
   useEffect(() => {
@@ -49,4 +49,4 @@ const View = () => {
   )
 }
 
-export default View
+export default UserDetails
