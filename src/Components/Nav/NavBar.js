@@ -5,11 +5,14 @@ import Navbar from "react-bootstrap/Navbar"
 import { useNavigate, Link, useLocation, redirect } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap"
 import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
+import { reset } from "../../features/auth/authSlice"
 
 function NavBar(props) {
   const [activeTab, setActiveTab] = useState("Home")
   const [username, setUsername] = useState()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const location = useLocation()
   useEffect(() => {
     if (location.pathname === "/admin/") setActiveTab("Home")
@@ -30,6 +33,7 @@ function NavBar(props) {
   const handleLogout = () => {
     setUsername("")
     localStorage.removeItem("admin")
+    dispatch(reset())
     toast.success("Admin Logout Succesfull")
     setTimeout(() => {
       navigate("/admin/login")
