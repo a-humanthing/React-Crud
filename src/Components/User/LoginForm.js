@@ -47,7 +47,7 @@ function LoginForm() {
           console.log("login response.data = ", response.data)
           toast.success("Succesfully Logged In")
           setTimeout(() => {
-            navigate("/user/home")
+            navigate("/home")
           }, 500)
         } else {
           toast.error("Invalid Login")

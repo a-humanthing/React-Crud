@@ -33,7 +33,7 @@ export default function ProfileCard() {
     if (!userDetails) {
       toast.error("Unauthorized user route")
       setTimeout(() => {
-        navigate("/user/home")
+        navigate("/home")
       }, 500)
     }
   }, [])

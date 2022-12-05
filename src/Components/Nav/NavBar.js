@@ -12,10 +12,10 @@ function NavBar(props) {
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
-    if (location.pathname === "/") setActiveTab("Home")
-    if (location.pathname === "/add") setActiveTab("AddUser")
-    if (location.pathname === "/about") setActiveTab("About")
-    if (location.pathname === "/register") setActiveTab("Register")
+    if (location.pathname === "/admin/") setActiveTab("Home")
+    if (location.pathname === "/admin/add") setActiveTab("AddUser")
+    if (location.pathname === "/admin/about") setActiveTab("About")
+    if (location.pathname === "/admin/register") setActiveTab("Register")
 
     const adminDetails = localStorage.getItem("admin")
     if (adminDetails) {
@@ -32,7 +32,7 @@ function NavBar(props) {
     localStorage.removeItem("admin")
     toast.success("Admin Logout Succesfull")
     setTimeout(() => {
-      navigate("/login")
+      navigate("/admin/login")
     }, 500)
   }
   return (
@@ -42,7 +42,7 @@ function NavBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <LinkContainer to="/">
+            <LinkContainer to="/admin/">
               <Nav.Link
                 className={`${activeTab == "Home" ? "active" : ""}`}
                 onClick={() => setActiveTab("Home")}
@@ -50,7 +50,7 @@ function NavBar(props) {
                 Home
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/add">
+            <LinkContainer to="/admin/add">
               <Nav.Link
                 className={`${activeTab == "AddUser" ? "active" : ""}`}
                 onClick={() => setActiveTab("AddUser")}
@@ -66,7 +66,9 @@ function NavBar(props) {
                 Logout
               </Nav.Link>
             ) : (
-              <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
+              <Nav.Link onClick={() => navigate("/admin/login")}>
+                Login
+              </Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>

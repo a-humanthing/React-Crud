@@ -7,6 +7,8 @@ import Login from "../Pages/user/Login"
 import UserHome from "../Pages/user/UserHome"
 import UserNav from "../Components/Nav/UserNav"
 import Profile from "../Pages/user/Profile"
+import PrivateRoutes from "./PrivateRoutes"
+import WelcomeRoute from "./WelcomeRoute"
 
 const UserRoutes = () => {
   return (
@@ -14,10 +16,14 @@ const UserRoutes = () => {
       <UserNav />
       <ToastContainer style={{ marginTop: "60px" }} position="top-center" />
       <Routes>
-        <Route path="/register" element={<UserRegister />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<UserHome />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<WelcomeRoute />}>
+          <Route path="/register" element={<UserRegister />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/home" element={<UserHome />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
     </div>
   )

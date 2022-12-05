@@ -57,7 +57,7 @@ const AddEditForm = () => {
       } else {
         addUser(state)
       }
-      setTimeout(() => navigate("/"), 500)
+      setTimeout(() => navigate("/admin/"), 500)
     }
   }
   const handleInputChange = (e) => {

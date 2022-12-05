@@ -22,7 +22,7 @@ function UserNav() {
     localStorage.removeItem("user")
     toast.success("Logout Succesfully")
     setTimeout(() => {
-      navigate("/user/login")
+      navigate("/login")
     }, 500)
   }
   return (
@@ -31,23 +31,23 @@ function UserNav() {
         <Container>
           <Navbar.Brand>User</Navbar.Brand>
           <Nav className="me-auto">
-            <LinkContainer to="/user/home">
+            <LinkContainer to="/home">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/user/register">
+            <LinkContainer to="/register">
               <Nav.Link>Register</Nav.Link>
             </LinkContainer>
             {!username ? (
-              <LinkContainer to="/user/login">
+              <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             ) : (
-              <LinkContainer to="/user/profile">
+              <LinkContainer to="/profile">
                 <Nav.Link>{username}</Nav.Link>
               </LinkContainer>
             )}
             {username && (
-              <LinkContainer to="/user/login">
+              <LinkContainer to="/login">
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </LinkContainer>
             )}

@@ -31,7 +31,7 @@ const LoginForm = () => {
           console.log("login response.data = ", response.data)
           toast.success("Admin Succesfully Logged In")
           setTimeout(() => {
-            navigate("/")
+            navigate("/admin/")
           }, 500)
         }
       } catch (error) {

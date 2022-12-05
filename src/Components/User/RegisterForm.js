@@ -60,7 +60,7 @@ function RegisterForm() {
           console.log("register = ", response)
           toast.success("Submited")
           setTimeout(() => {
-            navigate("/user/login")
+            navigate("/login")
           }, 500)
         } else {
           toast.error("failed")

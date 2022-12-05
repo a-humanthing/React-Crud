@@ -60,7 +60,7 @@ const UserTable = () => {
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>
-                      <Link to={`/update/${item._id}`}>
+                      <Link to={`/admin/update/${item._id}`}>
                         <Button className="btn" variant="primary">
                           Edit
                         </Button>
@@ -72,7 +72,7 @@ const UserTable = () => {
                       >
                         Delete
                       </Button>
-                      <Link to={`/view/${item._id}`}>
+                      <Link to={`/admin/view/${item._id}`}>
                         <Button className="btn" variant="info">
                           View
                         </Button>
