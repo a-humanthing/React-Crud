@@ -14,6 +14,8 @@ import { toast } from "react-toastify"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { Button } from "react-bootstrap"
+import { useDispatch } from "react-redux"
+import { login } from "../../features/auth/authSlice"
 
 function LoginForm() {
   const [email, setEmail] = useState("")
@@ -30,6 +32,7 @@ function LoginForm() {
   }
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   async function loginUser(e) {
     e.preventDefault()
@@ -44,6 +47,7 @@ function LoginForm() {
         if (response.data.success) {
           setUser(response.data)
           localStorage.setItem("user", JSON.stringify(response.data))
+          dispatch(login(response.data))
           console.log("login response.data = ", response.data)
           toast.success("Succesfully Logged In")
           setTimeout(() => {

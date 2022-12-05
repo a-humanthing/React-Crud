@@ -5,9 +5,12 @@ import { LinkContainer } from "react-router-bootstrap"
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 function UserNav() {
   const [username, setUsername] = useState()
+  const data = useSelector((state) => state.auth)
+  console.log("reduxt data = ", data)
   useEffect(() => {
     const userDetails = localStorage.getItem("user")
     const user = JSON.parse(userDetails)
