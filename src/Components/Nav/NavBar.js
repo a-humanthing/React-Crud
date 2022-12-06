@@ -12,20 +12,21 @@ function NavBar(props) {
   const [activeTab, setActiveTab] = useState("Home")
   const [username, setUsername] = useState()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const location = useLocation()
+  const adminDetails = localStorage.getItem("admin")
+  useEffect(() => {
+    if (!adminDetails) navigate("/admin/login")
+  }, [adminDetails])
   useEffect(() => {
     if (location.pathname === "/admin/") setActiveTab("Home")
     if (location.pathname === "/admin/add") setActiveTab("AddUser")
     if (location.pathname === "/admin/about") setActiveTab("About")
     if (location.pathname === "/admin/register") setActiveTab("Register")
 
-    const adminDetails = localStorage.getItem("admin")
     if (adminDetails) {
       const admin = JSON.parse(adminDetails)
       if (admin) {
         setUsername("admin")
-        console.log(admin.token)
       }
     }
   }, [location])
@@ -33,7 +34,6 @@ function NavBar(props) {
   const handleLogout = () => {
     setUsername("")
     localStorage.removeItem("admin")
-    dispatch(reset())
     toast.success("Admin Logout Succesfull")
     setTimeout(() => {
       navigate("/admin/login")
@@ -48,7 +48,7 @@ function NavBar(props) {
           <Nav className="me-auto">
             <LinkContainer to="/admin/">
               <Nav.Link
-                className={`${activeTab == "Home" ? "active" : ""}`}
+                className={`${activeTab === "Home" ? "active" : ""}`}
                 onClick={() => setActiveTab("Home")}
               >
                 Home
@@ -56,7 +56,7 @@ function NavBar(props) {
             </LinkContainer>
             <LinkContainer to="/admin/add">
               <Nav.Link
-                className={`${activeTab == "AddUser" ? "active" : ""}`}
+                className={`${activeTab === "AddUser" ? "active" : ""}`}
                 onClick={() => setActiveTab("AddUser")}
               >
                 AddUser
@@ -64,7 +64,7 @@ function NavBar(props) {
             </LinkContainer>
             {username ? (
               <Nav.Link
-                className={`${activeTab == "About" ? "active" : ""}`}
+                className={`${activeTab === "About" ? "active" : ""}`}
                 onClick={handleLogout}
               >
                 Logout

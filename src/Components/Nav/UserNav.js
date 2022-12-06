@@ -5,24 +5,27 @@ import { LinkContainer } from "react-router-bootstrap"
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { reset } from "../../features/auth/authSlice"
 
 function UserNav() {
   const [username, setUsername] = useState()
   const data = useSelector((state) => state.auth)
   console.log("reduxt data = ", data)
+  const userDetails = localStorage.getItem("user")
   useEffect(() => {
-    const userDetails = localStorage.getItem("user")
     const user = JSON.parse(userDetails)
     if (user) {
       setUsername(user.name)
       console.log(user.token)
     }
-  }, [])
+  }, [userDetails])
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleLogout = () => {
     setUsername("")
     localStorage.removeItem("user")
+    dispatch(reset())
     toast.success("Logout Succesfully")
     setTimeout(() => {
       navigate("/login")

@@ -6,17 +6,20 @@ import View from "../Pages/Admin/View"
 import { ToastContainer } from "react-toastify"
 import NavBar from "../Components/Nav/NavBar"
 import Login from "../Pages/Admin/Login"
+import PrivateAdminRoutes from "./PrivateAdminRoutes"
 
 const AdminRoutes = () => {
   return (
     <div>
       <NavBar user="admin" />
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-right" />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/add" element={<AddEdit />} />
-        <Route path="/update/:id" element={<AddEdit />} />
-        <Route path="/view/:id" element={<View />} />
+        <Route element={<PrivateAdminRoutes />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddEdit />} />
+          <Route path="/update/:id" element={<AddEdit />} />
+          <Route path="/view/:id" element={<View />} />
+        </Route>
         <Route path="/login" element={<Login />} />
 
         {/* <Route path="/about" element={<About />} />
